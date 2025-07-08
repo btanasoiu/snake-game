@@ -494,17 +494,27 @@
                 return;
             }
             
-            if (!gameRunning || gamePaused) return;
+            if (!gameRunning || gamePaused) {
+                // Still prevent default for arrow keys even when game is not running
+                if (key.startsWith('Arrow')) {
+                    e.preventDefault();
+                }
+                return;
+            }
             
             let newDirection = null;
             
             if (key === 'ArrowUp') {
+                e.preventDefault();
                 newDirection = { dx: 0, dy: -1 };
             } else if (key === 'ArrowDown') {
+                e.preventDefault();
                 newDirection = { dx: 0, dy: 1 };
             } else if (key === 'ArrowLeft') {
+                e.preventDefault();
                 newDirection = { dx: -1, dy: 0 };
             } else if (key === 'ArrowRight') {
+                e.preventDefault();
                 newDirection = { dx: 1, dy: 0 };
             }
             
