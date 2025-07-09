@@ -118,18 +118,156 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.9);
-            padding: 30px;
+            background: rgba(0, 0, 0, 0.95);
+            padding: 25px;
             border-radius: 15px;
             text-align: center;
             border: 2px solid rgba(255, 255, 255, 0.3);
             display: none;
+            min-width: 300px;
+            max-width: 90%;
         }
 
         .game-over h2 {
             color: #ff6b6b;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             font-size: 2em;
+        }
+
+        .game-over > p {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .name-input-section {
+            margin: 15px 0;
+            display: none;
+        }
+
+        .name-input-section.show {
+            display: block;
+        }
+
+        .name-input-section h3 {
+            color: #ffd93d;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .name-input-section p {
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .name-input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 18px;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 2px;
+            width: 100px;
+            margin: 10px 10px 15px 10px;
+        }
+
+        .name-input:focus {
+            outline: none;
+            border-color: #ffd93d;
+            box-shadow: 0 0 10px rgba(255, 217, 61, 0.3);
+        }
+
+        .name-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .high-score-table {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .high-score-table h3 {
+            color: #ffd93d;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .leaderboard {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .leaderboard li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 15px;
+            margin: 5px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 14px;
+        }
+
+        .leaderboard li:nth-child(1) {
+            background: linear-gradient(45deg, #ffd93d, #ffb347);
+            color: #2d3748;
+            font-weight: bold;
+        }
+
+        .leaderboard li:nth-child(2) {
+            background: linear-gradient(45deg, #c0c0c0, #a8a8a8);
+            color: #2d3748;
+            font-weight: bold;
+        }
+
+        .leaderboard li:nth-child(3) {
+            background: linear-gradient(45deg, #cd7f32, #b8860b);
+            color: white;
+            font-weight: bold;
+        }
+
+        .leaderboard li.current-score {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .rank {
+            font-weight: bold;
+            margin-right: 10px;
+            min-width: 30px;
+        }
+
+        .player-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .player-name {
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .player-score {
+            font-weight: bold;
         }
 
         .instructions {
@@ -161,7 +299,22 @@
         .key:nth-child(3) { grid-column: 2; }
         .key:nth-child(4) { grid-column: 3; }
 
-        @media (max-width: 600px) {
+        .toggle-leaderboard {
+            background: linear-gradient(45deg, #4ecdc4, #45b7aa);
+            margin-top: 10px;
+        }
+
+        .leaderboard-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .leaderboard-container.show {
+            max-height: 500px;
+        }
+
+            @media (max-width: 600px) {
             .game-container {
                 padding: 15px;
                 margin: 10px;
@@ -185,6 +338,33 @@
             .game-board {
                 max-width: 100%;
             }
+
+            .game-over {
+                min-width: 280px;
+                padding: 20px;
+            }
+
+            .game-over h2 {
+                font-size: 1.8em;
+                margin-bottom: 8px;
+            }
+
+            .game-over > p {
+                font-size: 1.1em;
+                margin-bottom: 12px;
+            }
+
+            .name-input-section h3 {
+                font-size: 1.2em;
+                margin-bottom: 8px;
+            }
+
+            .name-input {
+                width: 80px;
+                font-size: 16px;
+                padding: 8px 12px;
+                margin: 8px 8px 12px 8px;
+            }
         }
     </style>
 </head>
@@ -203,7 +383,18 @@
             <div class="game-over" id="gameOver">
                 <h2>Game Over!</h2>
                 <p>Your Score: <span id="finalScore">0</span></p>
-                <button class="btn" onclick="startGame()">Play Again</button>
+                
+                <div class="name-input-section" id="nameInputSection">
+                    <h3>🎉 New High Score!</h3>
+                    <p>Enter your initials:</p>
+                    <input type="text" class="name-input" id="playerName" maxlength="3" placeholder="ABC">
+                    <br><br>
+                    <button class="btn" onclick="submitHighScore()">Submit</button>
+                </div>
+                
+                <div id="gameOverButtons">
+                    <button class="btn" onclick="startGame()">Play Again</button>
+                </div>
             </div>
         </div>
         
@@ -211,6 +402,14 @@
             <button class="btn" id="startBtn" onclick="startGame()">Start Game</button>
             <button class="btn" id="pauseBtn" onclick="pauseGame()" disabled>Pause</button>
             <button class="btn" onclick="resetGame()">Reset</button>
+            <button class="btn toggle-leaderboard" onclick="toggleLeaderboard()">Show Leaderboard</button>
+        </div>
+        
+        <div class="leaderboard-container" id="leaderboardContainer">
+            <div class="high-score-table">
+                <h3>🏆 High Scores</h3>
+                <ul class="leaderboard" id="leaderboard"></ul>
+            </div>
         </div>
         
         <div class="instructions">
@@ -235,6 +434,11 @@
         const finalScoreElement = document.getElementById('finalScore');
         const startBtn = document.getElementById('startBtn');
         const pauseBtn = document.getElementById('pauseBtn');
+        const nameInputSection = document.getElementById('nameInputSection');
+        const playerNameInput = document.getElementById('playerName');
+        const gameOverButtons = document.getElementById('gameOverButtons');
+        const leaderboardContainer = document.getElementById('leaderboardContainer');
+        const leaderboardElement = document.getElementById('leaderboard');
 
         const gridSize = 20;
         const tileCountX = Math.floor(canvas.width / gridSize);
@@ -247,28 +451,31 @@
         let dx = 0;
         let dy = 0;
         let score = 0;
-        let highScore = localStorage.getItem('snakeHighScore') || 0;
         let gameRunning = false;
         let gamePaused = false;
         let gameLoop;
         let inputBuffer = [];
         let lastDirection = { dx: 0, dy: 0 };
+        let currentGameScore = 0;
 
-        // Initialize high score display
+        // High score management
+        let highScores = JSON.parse(localStorage.getItem('snakeHighScores')) || [];
+        let highScore = highScores.length > 0 ? highScores[0].score : 0;
+
+        // Initialize displays
         highScoreElement.textContent = highScore;
+        updateLeaderboard();
 
         function generateFood() {
             let newFood;
             let validPosition = false;
             
-            // Keep generating new positions until we find one not occupied by the snake
             while (!validPosition) {
                 newFood = {
                     x: Math.floor(Math.random() * tileCountX),
                     y: Math.floor(Math.random() * tileCountY)
                 };
                 
-                // Check if this position is occupied by any part of the snake
                 validPosition = true;
                 for (let segment of snake) {
                     if (segment.x === newFood.x && segment.y === newFood.y) {
@@ -299,7 +506,6 @@
             
             snake.forEach((segment, index) => {
                 if (index === 0) {
-                    // Head with gradient
                     const gradient = ctx.createRadialGradient(
                         segment.x * gridSize + gridSize/2,
                         segment.y * gridSize + gridSize/2,
@@ -312,7 +518,6 @@
                     gradient.addColorStop(1, '#4ecdc4');
                     ctx.fillStyle = gradient;
                 } else {
-                    // Body segments with better opacity fade
                     const opacity = Math.max(0.3, 1 - index * 0.02);
                     ctx.fillStyle = `rgba(78, 205, 196, ${opacity})`;
                 }
@@ -348,12 +553,11 @@
             if (inputBuffer.length > 0) {
                 const nextMove = inputBuffer.shift();
                 
-                // Prevent reversing into self
                 if ((nextMove.dx === 1 && lastDirection.dx === -1) ||
                     (nextMove.dx === -1 && lastDirection.dx === 1) ||
                     (nextMove.dy === 1 && lastDirection.dy === -1) ||
                     (nextMove.dy === -1 && lastDirection.dy === 1)) {
-                    return; // Invalid move, ignore
+                    return;
                 }
                 
                 dx = nextMove.dx;
@@ -380,12 +584,10 @@
         function checkCollisions() {
             const head = snake[0];
             
-            // Wall collision
             if (head.x < 0 || head.x >= tileCountX || head.y < 0 || head.y >= tileCountY) {
                 return true;
             }
             
-            // Self collision
             for (let i = 1; i < snake.length; i++) {
                 if (head.x === snake[i].x && head.y === snake[i].y) {
                     return true;
@@ -408,20 +610,103 @@
             drawGame();
         }
 
+        function isHighScore(score) {
+            if (highScores.length < 10) return true;
+            return score > highScores[highScores.length - 1].score;
+        }
+
         function gameOver() {
             gameRunning = false;
             clearInterval(gameLoop);
-            
-            if (score > highScore) {
-                highScore = score;
-                highScoreElement.textContent = highScore;
-                localStorage.setItem('snakeHighScore', highScore);
-            }
+            currentGameScore = score;
             
             finalScoreElement.textContent = score;
+            
+            if (isHighScore(score)) {
+                nameInputSection.classList.add('show');
+                gameOverButtons.style.display = 'none';
+                playerNameInput.focus();
+            } else {
+                nameInputSection.classList.remove('show');
+                gameOverButtons.style.display = 'block';
+            }
+            
             gameOverElement.style.display = 'block';
             startBtn.disabled = false;
             pauseBtn.disabled = true;
+        }
+
+        function submitHighScore() {
+            const playerName = playerNameInput.value.toUpperCase().trim();
+            
+            if (playerName.length !== 3) {
+                alert('Please enter exactly 3 letters for your name!');
+                return;
+            }
+            
+            // Add new score to the array
+            highScores.push({
+                name: playerName,
+                score: currentGameScore,
+                date: new Date().toISOString()
+            });
+            
+            // Sort by score (highest first)
+            highScores.sort((a, b) => b.score - a.score);
+            
+            // Keep only top 10
+            highScores = highScores.slice(0, 10);
+            
+            // Save to localStorage
+            localStorage.setItem('snakeHighScores', JSON.stringify(highScores));
+            
+            // Update displays
+            highScore = highScores[0].score;
+            highScoreElement.textContent = highScore;
+            updateLeaderboard();
+            
+            // Hide name input and show play again button
+            nameInputSection.classList.remove('show');
+            gameOverButtons.style.display = 'block';
+            playerNameInput.value = '';
+            
+            // Show leaderboard
+            leaderboardContainer.classList.add('show');
+        }
+
+        function updateLeaderboard() {
+            leaderboardElement.innerHTML = '';
+            
+            if (highScores.length === 0) {
+                leaderboardElement.innerHTML = '<li style="text-align: center; color: rgba(255,255,255,0.6);">No high scores yet!</li>';
+                return;
+            }
+            
+            highScores.forEach((entry, index) => {
+                const li = document.createElement('li');
+                
+                // Check if this is the current game's score
+                if (entry.score === currentGameScore && entry.name === playerNameInput.value.toUpperCase()) {
+                    li.classList.add('current-score');
+                }
+                
+                li.innerHTML = `
+                    <div class="player-info">
+                        <span class="rank">#${index + 1}</span>
+                        <span class="player-name">${entry.name}</span>
+                    </div>
+                    <span class="player-score">${entry.score}</span>
+                `;
+                
+                leaderboardElement.appendChild(li);
+            });
+        }
+
+        function toggleLeaderboard() {
+            leaderboardContainer.classList.toggle('show');
+            const button = document.querySelector('.toggle-leaderboard');
+            button.textContent = leaderboardContainer.classList.contains('show') ? 
+                'Hide Leaderboard' : 'Show Leaderboard';
         }
 
         function startGame() {
@@ -485,7 +770,15 @@
         document.addEventListener('keydown', (e) => {
             const key = e.key;
             
-            // Spacebar for pause/resume
+            // Handle name input
+            if (nameInputSection.classList.contains('show')) {
+                if (key === 'Enter') {
+                    e.preventDefault();
+                    submitHighScore();
+                    return;
+                }
+            }
+            
             if (key === ' ' || key === 'Spacebar') {
                 e.preventDefault();
                 if (gameRunning) {
@@ -495,7 +788,6 @@
             }
             
             if (!gameRunning || gamePaused) {
-                // Still prevent default for arrow keys even when game is not running
                 if (key.startsWith('Arrow')) {
                     e.preventDefault();
                 }
@@ -519,11 +811,9 @@
             }
             
             if (newDirection) {
-                // Only add to buffer if it's different from the last buffered direction
                 if (inputBuffer.length === 0 || 
                     (inputBuffer[inputBuffer.length - 1].dx !== newDirection.dx || 
                      inputBuffer[inputBuffer.length - 1].dy !== newDirection.dy)) {
-                    // Limit buffer size to prevent excessive input buildup
                     if (inputBuffer.length < 3) {
                         inputBuffer.push(newDirection);
                     }
